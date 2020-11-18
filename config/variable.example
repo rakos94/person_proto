@@ -1,0 +1,26 @@
+package config
+
+// DB
+const (
+	host    = "localhost"
+	user    = "postgres"
+	pass    = "secret"
+	dbname  = "personal_hr"
+	port    = 5432
+	sslmode = "disable"
+)
+
+// APPS
+const (
+	AppPort = "8090"
+	HostCredential = "192.168.15.245:1111"
+	GRPCPort       = "80901"
+)
+
+// JWT
+var (
+	UserIdExample        = "20022012"
+	SecretKeyExample     = "mLmHu8f1IxFo4dWurBG3jEf1Ex0wDZvvwND6eFmcaX"
+	SigningMethodExample = "HS512"
+	JwtExpiredHour       = 3
+)

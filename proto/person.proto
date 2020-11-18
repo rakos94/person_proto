@@ -1,0 +1,18 @@
+syntax = "proto3";
+
+package proto;
+
+option go_package = "person_proto/pb";
+
+message GetPerson {
+    string id = 1;
+}
+
+message Response {
+    string code = 1;
+    string data = 2;
+}
+
+service PersonService {
+    rpc GetPersonById(GetPerson) returns (Response);
+}
