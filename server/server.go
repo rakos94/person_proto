@@ -18,17 +18,17 @@ type Server struct {
 }
 
 func (*Server) GetPersonById(ctx context.Context, u *pb.GetPerson) (*pb.Response, error) {
-	log.Println("Getperson from client =>", u)
+	log.Println("CLIENT: GetPersonById =>", u)
 	person := pb.GetPerson{
 		Id: u.Id,
 	}
 	result, err := personService.GetPersonByID(person.Id)
 	if err != nil {
-		log.Println("Failed get person err =>", err)
+		log.Println("SERVER: Failed GetPersonById =>", err)
 		return &pb.Response{}, status.Errorf(codes.NotFound, "Person not found")
 	}
 
-	log.Println("Success get person from client =>", u)
+	log.Println("SERVER: Success GetPersonById =>", u)
 	data, _ := json.Marshal(&result)
 	return &pb.Response{Code: "200", Data: string(data)}, nil
 }
