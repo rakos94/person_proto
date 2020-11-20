@@ -36,6 +36,17 @@ func (EducationDaoImpl) GetEducationByID(id string) (models.Education, error) {
 	return data, nil
 }
 
+// GetEducationByPersonID ...
+func (EducationDaoImpl) GetEducationByPersonID(id string) ([]models.Education, error) {
+	data := []models.Education{}
+	result := g.Preload("Person").Where("person_id", id).Find(&data)
+	if result.Error != nil {
+		return data, result.Error
+	}
+
+	return data, nil
+}
+
 // UpdateEducation ...
 func (EducationDaoImpl) UpdateEducation(id string, data *models.Education) (*models.Education, error) {
 	m := &models.Education{}

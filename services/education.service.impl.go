@@ -1,6 +1,7 @@
 package services
 
 import (
+	"errors"
 	"person_proto/dao"
 	"person_proto/models"
 )
@@ -13,6 +14,10 @@ type EducationServiceImpl struct {
 
 // CreateEducation ...
 func (EducationServiceImpl) CreateEducation(data *models.Education) (*models.Education, error) {
+	_, err := personService.GetPersonByID(data.PersonID)
+	if err != nil {
+		return nil, errors.New("Person id not exist")
+	}
 	return educationDao.CreateEducation(data)
 }
 
@@ -24,6 +29,15 @@ func (EducationServiceImpl) GetEducationAll() ([]models.Education, error) {
 // GetEducationByID ...
 func (EducationServiceImpl) GetEducationByID(id string) (models.Education, error) {
 	return educationDao.GetEducationByID(id)
+}
+
+// GetEducationByPersonID ...
+func (EducationServiceImpl) GetEducationByPersonID(id string) ([]models.Education, error) {
+	_, err := personService.GetPersonByID(id)
+	if err != nil {
+		return nil, errors.New("Person id not exist")
+	}
+	return educationDao.GetEducationByPersonID(id)
 }
 
 // UpdateEducation ...
